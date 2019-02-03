@@ -16,8 +16,8 @@ dependencies {
 }
 
 compileKotlin2Js {
-    kotlinOptions.moduleKind = "amd"
-    kotlinOptions.sourceMap = true
+//    kotlinOptions.moduleKind = "amd"
+//    kotlinOptions.sourceMap = true
 }
 
 task assembleWeb(type: Sync) {
@@ -26,8 +26,7 @@ task assembleWeb(type: Sync) {
             includeEmptyDirs = false
             include { fileTreeElement ->
                 def path = fileTreeElement.path
-//                path.endsWith(".js") && (path.startsWith("META-INF/resources/") || !path.startsWith("META-INF/"))
-                (path.endsWith(".js") || path.endsWith(".html")) && (path.startsWith("META-INF/resources/") || !path.startsWith("META-INF/"))
+                path.endsWith(".js") && (path.startsWith("META-INF/resources/") || !path.startsWith("META-INF/"))
             }
         })
     }
@@ -35,6 +34,14 @@ task assembleWeb(type: Sync) {
     into "${buildDir}/web"
 
     dependsOn classes
+}
+
+assemble.doLast() {
+    copy {
+        includeEmptyDirs = false
+        from new File("build/resources/main")
+        into "${buildDir}/web"
+    }
 }
 
 assemble.dependsOn assembleWeb
