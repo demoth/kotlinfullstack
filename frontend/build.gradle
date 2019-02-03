@@ -17,7 +17,8 @@ dependencies {
 
 compileKotlin2Js {
 //    kotlinOptions.moduleKind = "amd"
-//    kotlinOptions.sourceMap = true
+    kotlinOptions.sourceMap = true
+    kotlinOptions.sourceMapEmbedSources = 'always'
 }
 
 task assembleWeb(type: Sync) {
