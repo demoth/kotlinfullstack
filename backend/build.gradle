@@ -1,5 +1,10 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.3.11'
+    id 'application'
+}
+
+application {
+    mainClassName = 'sampleprogram.SampleProgramKt'
 }
 
 group 'elpsikongro'
@@ -12,6 +17,8 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile "org.springframework.boot:spring-boot-starter-web:2.1.0.RELEASE"
+
 }
 
 compileKotlin {
@@ -20,3 +27,12 @@ compileKotlin {
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
+
+task copyStatic(type: Copy) {
+    from project(':frontend').file('build/web')
+    into file('build/classes/kotlin/main/static')
+}
+
+classes.dependsOn copyStatic
+
+copyStatic.dependsOn ':frontend:build'
