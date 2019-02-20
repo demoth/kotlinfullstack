@@ -8,10 +8,12 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenLocal()
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-js"
+    compile "org.jetbrains.kotlinx:kotlinx-html-js:0.6.12"
     testCompile "org.jetbrains.kotlin:kotlin-test-js"
 }
 

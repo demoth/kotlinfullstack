@@ -1,3 +1,6 @@
+import kotlinx.html.dom.append
+import kotlinx.html.js.p
+import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLTextAreaElement
 import org.w3c.dom.events.Event
 import org.w3c.xhr.XMLHttpRequest
@@ -18,6 +21,13 @@ fun main() {
             users.forEach {
                 val message = it["message"]
                 textarea.value += "$message\n"
+            }
+            val root = document.getElementById("root") as HTMLElement
+
+            root.append {
+                p {
+                    +"<Finished html lib loading>"
+                }
             }
         }
         req.open("GET", url, true)
