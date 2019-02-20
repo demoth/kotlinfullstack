@@ -9,12 +9,11 @@ open class SampleController {
 
     private val json = ObjectMapper()
 
-    @GetMapping("/getUsers")
-    fun getUsers(): String {
-//        return json.writeValueAsString(arrayListOf("Daniil", "Julia", "Timosha", "Katyusha"))
+    @GetMapping("/sample")
+    fun getSample(): String {
         return json.writeValueAsString(arrayListOf(
-                mapOf("message" to "Daniil"),
-                mapOf("message" to "Julia")
+                mapOf("message" to "Sample1"),
+                mapOf("message" to "Sample2")
         ))
     }
 }

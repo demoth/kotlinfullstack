@@ -10,12 +10,10 @@ import kotlin.js.Json
 
 fun main() {
     window.onload = {
-        val url = "/getUsers"
-        val req = XMLHttpRequest()
-        req.onloadend = fun(event: Event) {
-            val text = req.responseText
-            println(text)
-            val users = JSON.parse<Array<Json>>(text)
+        ajaxget("/sample") {
+            println(it)
+            val users = JSON.parse<Array<Json>>(it)
+
             val textarea = document.getElementById("textarea_id") as HTMLTextAreaElement
             textarea.value = ""
             users.forEach {
@@ -26,13 +24,19 @@ fun main() {
 
             root.append {
                 p {
-                    +"<Finished html lib loading>"
+                    +"Sample status: Ok"
                 }
             }
         }
-        req.open("GET", url, true)
-        req.send()
 
-        println("Done")
     }
+}
+
+fun ajaxget(url: String, onloadend: (String) -> dynamic) {
+    val req = XMLHttpRequest()
+    req.onloadend = fun(event: Event) { onloadend(req.responseText) }
+    req.open("GET", url, true)
+    req.send()
+
+    println("Done")
 }
