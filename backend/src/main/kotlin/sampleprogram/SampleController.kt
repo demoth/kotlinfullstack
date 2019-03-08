@@ -12,8 +12,8 @@ open class SampleController {
     @GetMapping("/sample")
     fun getSample(): String {
         return json.writeValueAsString(arrayListOf(
-                mapOf("message" to "Sample1"),
-                mapOf("message" to "Sample2")
+                User("Alpha", 10),
+                User("Omega", 20)
         ))
     }
 }
